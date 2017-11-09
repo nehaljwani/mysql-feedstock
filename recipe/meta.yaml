@@ -18,15 +18,11 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
     - cmake
-    - perl 5.22.2.1
-    - libedit 3.1.20170329
-    - openssl 1.0.*
-
-  run:
-    - libedit >=3.1.20170329
-    - openssl 1.0.*
+    - perl
+    - libedit
+    - openssl
 
 test:
   commands:
@@ -41,7 +37,6 @@ about:
   license_family: GPL
   license_file: COPYING
   summary: 'Open source relational database management system.'
-
   description: |
     The MySQL(TM) software delivers a very fast, multi-threaded, multi-user,
     and robust SQL (Structured Query Language) database server. MySQL Server
@@ -51,3 +46,4 @@ about:
 extra:
   recipe-maintainers:
     - beckermr
+    - mingwandroid
