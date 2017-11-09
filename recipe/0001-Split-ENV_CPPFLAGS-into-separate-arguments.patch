@@ -1,0 +1,17 @@
+diff -urN mysql-5.7.20.orig/CMakeLists.txt mysql-5.7.20/CMakeLists.txt
+--- mysql-5.7.20.orig/CMakeLists.txt	2017-11-09 15:40:55.000000000 +0000
++++ mysql-5.7.20/CMakeLists.txt	2017-11-09 15:42:52.000000000 +0000
+@@ -183,9 +183,12 @@
+ # Following autotools tradition, add preprocessor definitions
+ # specified in environment variable CPPFLAGS
+ IF(DEFINED ENV{CPPFLAGS})
+-  ADD_DEFINITIONS($ENV{CPPFLAGS})
++  SET(ENV_CPPFLAGS $ENV{CPPFLAGS})
++  SEPARATE_ARGUMENTS(ENV_CPPFLAGS)
++  ADD_DEFINITIONS(${ENV_CPPFLAGS})
+ ENDIF()
+ 
++
+ INCLUDE(CheckTypeSize)
+ CHECK_TYPE_SIZE("void *" SIZEOF_VOIDP)
+ MESSAGE(STATUS "SIZEOF_VOIDP ${SIZEOF_VOIDP}")

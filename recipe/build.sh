@@ -4,7 +4,7 @@
 # https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql.rb
 
 # make sure we can find cpp on the linux CI service
-CPP_ROOT=`dirname $(which cpp)`
+CPP_ROOT=`dirname ${CPP:-$(which cpp)}`
 export LC_ALL=C  # on osx sed chokes on non UTF-8
 find . -type f -print0 | xargs -0 sed -i"" -e "s|COMMAND rpcgen  -C|COMMAND rpcgen  -Y ${CPP_ROOT} -C|g"
 unset LC_ALL
@@ -12,7 +12,14 @@ unset LC_ALL
 mkdir -p build
 cd build
 
-# -DINSTALL_* are relatiove to -DCMAKE_INSTALL_PREFIX
+declare -a _cmake_config_extra
+if [[ ${HOST} =~ .*darwin.* ]]; then
+  _cmake_config_extra+=(-DCMAKE_OSX_SYSROOT=${CONDA_BUILD_SYSROOT})
+  LDFLAGS=${LDFLAGS_CC}
+fi
+LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib"
+
+# -DINSTALL_* are relative to -DCMAKE_INSTALL_PREFIX
 mkdir -p ${PREFIX}/mysql
 cmake \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
@@ -25,10 +32,11 @@ cmake \
     -DINSTALL_MYSQLSHAREDIR=share/mysql \
     -DINSTALL_SUPPORTFILESDIR=mysql/support-files \
     -DINSTALL_SCRIPTDIR=mysql/scripts \
+    -DCMAKE_CXX=${CXX} \
+    -DCMAKE_CC=${CC} \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_FIND_FRAMEWORK=LAST \
     -DCMAKE_VERBOSE_MAKEFILE=OFF \
-    -Wno-dev \
     -DWITH_UNIT_TESTS=OFF \
     -DDEFAULT_CHARSET=utf8 \
     -DDEFAULT_COLLATION=utf8_general_ci \
@@ -37,6 +45,7 @@ cmake \
     -DWITH_EDITLINE=system \
     -DWITH_BOOST=bundled \
     -DDOWNLOAD_BOOST=1 \
+    ${_cmake_config_extra[@]} \
     .. 2>&1 | tee cmake.log
 
 make -j${CPU_COUNT} ${VERBOSE_CM} 2>&1 | tee build.log

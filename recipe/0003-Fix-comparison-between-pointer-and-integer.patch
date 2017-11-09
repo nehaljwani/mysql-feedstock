@@ -1,0 +1,12 @@
+diff -urN mysql-5.7.20.orig/sql-common/client_authentication.cc mysql-5.7.20/sql-common/client_authentication.cc
+--- mysql-5.7.20.orig/sql-common/client_authentication.cc	2017-11-09 15:40:55.000000000 +0000
++++ mysql-5.7.20/sql-common/client_authentication.cc	2017-11-09 16:28:11.000000000 +0000
+@@ -84,7 +84,7 @@
+ 
+   if (mysql->options.extension != NULL &&
+       mysql->options.extension->server_public_key_path != NULL &&
+-      mysql->options.extension->server_public_key_path != '\0')
++      mysql->options.extension->server_public_key_path[0] != '\0')
+   {
+     pub_key_file= fopen(mysql->options.extension->server_public_key_path,
+                         "r");
