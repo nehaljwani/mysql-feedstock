@@ -37,10 +37,10 @@ cmake \
     -DWITH_EDITLINE=system \
     -DWITH_BOOST=bundled \
     -DDOWNLOAD_BOOST=1 \
-    .. &> cmake.log
+    .. 2>&1 | tee cmake.log
 
-make
-make install &> install.log
+make -j${CPU_COUNT} ${VERBOSE_CM} 2>&1 | tee build.log
+make install ${VERBOSE_CM} 2>&1 | tee install.log
 
 # remove this dir so we do not ship it
 cd ${PREFIX}/mysql-test
