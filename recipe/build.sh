@@ -3,12 +3,6 @@
 # this script is based off the homebrew package:
 # https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql.rb
 
-# make sure we can find cpp on the linux CI service
-CPP_ROOT=`dirname ${CPP:-$(which cpp)}`
-export LC_ALL=C  # on osx sed chokes on non UTF-8
-find . -type f -print0 | xargs -0 sed -i"" -e "s|COMMAND rpcgen  -C|COMMAND rpcgen  -Y ${CPP_ROOT} -C|g"
-unset LC_ALL
-
 mkdir -p build
 cd build
 
@@ -16,8 +10,17 @@ declare -a _cmake_config_extra
 if [[ ${HOST} =~ .*darwin.* ]]; then
   _cmake_config_extra+=(-DCMAKE_OSX_SYSROOT=${CONDA_BUILD_SYSROOT})
   LDFLAGS=${LDFLAGS_CC}
+elif [[ ${HOST} =~ .*linux.* ]]; then
+  # Force -std=gnu++98 to workaround attempt to create a reference to a reference
+  # in rapid/plugin/group_replication/libmysqlgcs/src/bindings/xcom/gcs_xcom_communication_interface.cc (line 202)
+  re='(.*[[:space:]])\-std\=[^[:space:]]*(.*)'
+  if [[ "${CXXFLAGS}" =~ $re ]]; then
+    CXXFLAGS="${BASH_REMATCH[1]}-std=gnu++98${BASH_REMATCH[2]}"
+  fi
 fi
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib"
+CXXFLAGS="${CXXFLAGS} -fno-strict-aliasing"
+CFLAGS="${CFLAGS} -fno-strict-aliasing"
 
 # -DINSTALL_* are relative to -DCMAKE_INSTALL_PREFIX
 mkdir -p ${PREFIX}/mysql
