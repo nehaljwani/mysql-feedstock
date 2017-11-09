@@ -2,19 +2,22 @@
 {% set major_minor_version = "5.7" %}
 {% set micro_version = "20" %}
 {% set sha256 = "260582844ac18222ce2826f48b6c7ca387990b19ddb88331af26738b394e42a4" %}
+{% set sha256_boost = "47f11c8844e579d02691a607fbd32540104a9ac7a2534a8ddaef50daf502baac" %}
 
 package:
   name: {{ name|lower }}
   version: {{ major_minor_version }}.{{ micro_version }}
 
 source:
-  fn: mysql-boost-{{ major_minor_version }}.{{ micro_version }}.tar.gz
-  url: https://cdn.mysql.com/Downloads/MySQL-{{ major_minor_version }}/mysql-boost-{{ major_minor_version }}.{{ micro_version }}.tar.gz
-  sha256: {{ sha256 }}
-  patches:
-    - 0001-Split-ENV_CPPFLAGS-into-separate-arguments.patch
-    - 0002-Fix-comparison-between-pointer-and-integer.patch
-    - 0003-Fix-comparison-between-pointer-and-integer.patch
+  - url: https://cdn.mysql.com/Downloads/MySQL-{{ major_minor_version }}/mysql-boost-{{ major_minor_version }}.{{ micro_version }}.tar.gz
+    sha256: {{ sha256 }}
+    patches:
+      - 0001-Split-ENV_CPPFLAGS-into-separate-arguments.patch
+      - 0002-Fix-comparison-between-pointer-and-integer.patch
+      - 0003-Fix-comparison-between-pointer-and-integer.patch
+  - url: http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz
+    sha256: {{ sha256_boost }}
+    folder: boost
 
 build:
   number: 0

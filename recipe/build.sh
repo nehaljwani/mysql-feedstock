@@ -43,8 +43,7 @@ cmake \
     -DCOMPILATION_COMMENT=conda-forge \
     -DWITH_SSL=system \
     -DWITH_EDITLINE=system \
-    -DWITH_BOOST=bundled \
-    -DDOWNLOAD_BOOST=1 \
+    -DDOWNLOAD_BOOST=1 -DWITH_BOOST=${SRC_DIR}/boost \
     ${_cmake_config_extra[@]} \
     .. 2>&1 | tee cmake.log
 
