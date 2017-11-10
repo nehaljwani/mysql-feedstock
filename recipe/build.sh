@@ -37,6 +37,7 @@ cmake \
     -DINSTALL_SCRIPTDIR=mysql/scripts \
     -DCMAKE_CXX=${CXX} \
     -DCMAKE_CC=${CC} \
+    -DCMAKE_AR=${AR} \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_FIND_FRAMEWORK=LAST \
     -DCMAKE_VERBOSE_MAKEFILE=OFF \
