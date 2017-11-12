@@ -17,6 +17,13 @@ elif [[ ${HOST} =~ .*linux.* ]]; then
   if [[ "${CXXFLAGS}" =~ $re ]]; then
     CXXFLAGS="${BASH_REMATCH[1]}-std=gnu++98${BASH_REMATCH[2]}"
   fi
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=82956
+  if [[ ${HOST} =~ .*x86_64.* ]]; then
+    re='(.*)-fvisibility-inlines-hidden(.*)'
+    if [[ "${CXXFLAGS}" =~ $re ]]; then
+      CXXFLAGS="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+    fi
+  fi
 fi
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib"
 CXXFLAGS="${CXXFLAGS} -fno-strict-aliasing"
