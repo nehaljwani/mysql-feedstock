@@ -9,7 +9,6 @@ cd build
 declare -a _cmake_config_extra
 if [[ ${HOST} =~ .*darwin.* ]]; then
   _cmake_config_extra+=(-DCMAKE_OSX_SYSROOT=${CONDA_BUILD_SYSROOT})
-  LDFLAGS=${LDFLAGS_CC}
 elif [[ ${HOST} =~ .*linux.* ]]; then
   # Force -std=gnu++98 to workaround attempt to create a reference to a reference
   # in rapid/plugin/group_replication/libmysqlgcs/src/bindings/xcom/gcs_xcom_communication_interface.cc (line 202)
