@@ -9,18 +9,18 @@ package:
 
 source:
   fn: mysql-boost-{{ major_minor_version }}.{{ micro_version }}.tar.gz
-  url: https://cdn.mysql.com/Downloads/MySQL-{{ major_minor_version }}/mysql-boost-{{ major_minor_version }}.{{ micro_version }}.tar.gz
+  url: https://downloads.mysql.com/archives/get/file/mysql-boost-{{ major_minor_version }}.{{ micro_version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
 
 requirements:
   build:
     - toolchain
     - cmake
-    - perl 5.22.2.1
+    - perl
     - libedit 3.1.20170329
     - openssl 1.0.*
 
