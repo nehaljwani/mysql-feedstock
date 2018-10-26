@@ -13,20 +13,16 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 1001
   skip: True  # [win]
+  merge_build_host: True
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cmake
     - perl
-    - libedit 3.1.20170329
-    - openssl 1.0.*
-
-  run:
-    - libedit >=3.1.20170329
-    - openssl 1.0.*
 
 test:
   commands:

@@ -4,17 +4,32 @@
 # https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql.rb
 
 # make sure we can find cpp on the linux CI service
-CPP_ROOT=`dirname $(which cpp)`
-export LC_ALL=C  # on osx sed chokes on non UTF-8
-find . -type f -print0 | xargs -0 sed -i"" -e "s|COMMAND rpcgen  -C|COMMAND rpcgen  -Y ${CPP_ROOT} -C|g"
-unset LC_ALL
+if [[ `uname` != "Darwin" ]]
+then
+    CPP_ROOT=`dirname ${CPP}`
+    export LC_ALL=C  # on osx sed chokes on non UTF-8
+    find . -type f -print0 | xargs -0 sed -i"" -e "s|COMMAND rpcgen  -C|COMMAND rpcgen  -Y ${CPP_ROOT} -C|g"
+    unset LC_ALL
+
+    # make sure the cmake build can find everything
+    ln -s ${CPP} `dirname ${CPP}`/cpp
+else
+    export CPPFLAGS=${CPPFLAGS%" -mmacosx-version-min=10.9"}
+fi
 
 mkdir -p build
 cd build
 
+export CXXFLAGS="-fpermissive "${CXXFLAGS}
+
 # -DINSTALL_* are relatiove to -DCMAKE_INSTALL_PREFIX
+# I checked and the bundled libs don't cause any issues with stomping
+# on the conda-forge packages. Thus I am going to go with them for now since
+# with the anaconda compilers I cannot convince the build to link properly.
 mkdir -p ${PREFIX}/mysql
 cmake \
+    -DCMAKE_C_FLAGS=${CFLAGS}" "${LDFLAGS} \
+    -DCMAKE_CXX_FLAGS=${CXXFLAGS}" "${LDFLAGS} \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DINSTALL_INCLUDEDIR=include/mysql \
@@ -33,8 +48,8 @@ cmake \
     -DDEFAULT_CHARSET=utf8 \
     -DDEFAULT_COLLATION=utf8_general_ci \
     -DCOMPILATION_COMMENT=conda-forge \
-    -DWITH_SSL=system \
-    -DWITH_EDITLINE=system \
+    -DWITH_SSL=bundled \
+    -DWITH_EDITLINE=bundled \
     -DWITH_BOOST=bundled \
     -DDOWNLOAD_BOOST=1 \
     .. &> cmake.log

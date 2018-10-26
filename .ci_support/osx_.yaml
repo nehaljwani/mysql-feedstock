@@ -17,3 +17,7 @@ perl:
 pin_run_as_build:
   perl:
     max_pin: x.x.x
+zip_keys:
+- - channel_sources
+  - channel_targets
+  - build_number_decrement
