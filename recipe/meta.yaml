@@ -1,7 +1,7 @@
 {% set name = "mysql" %}
 {% set major_minor_version = "5.7" %}
-{% set micro_version = "22" %}
-{% set sha256 = "5b2a61700af7c99f5630a7dfdb099af9283c3029843cddd9e123bcdbcc4aad03" %}
+{% set micro_version = "24" %}
+{% set sha256 = "b980dced9c9eb3385cca44870facc220504ca011196c5a19c2bfe43d3f5d6212" %}
 {% set sha256_boost = "47f11c8844e579d02691a607fbd32540104a9ac7a2534a8ddaef50daf502baac" %}
 
 package:
@@ -13,9 +13,6 @@ source:
     sha256: {{ sha256 }}
     patches:
       - 0001-Split-ENV_CPPFLAGS-into-separate-arguments.patch
-  - url: http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz
-    sha256: {{ sha256_boost }}
-    folder: boost
 
 build:
   number: 0
@@ -28,6 +25,7 @@ requirements:
     - cmake
     - make
     - perl
+    - patchelf
   host:
     - libedit
     - openssl

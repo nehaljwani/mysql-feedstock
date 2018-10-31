@@ -23,6 +23,20 @@ elif [[ ${HOST} =~ .*linux.* ]]; then
       CXXFLAGS="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
     fi
   fi
+  export LDFLAGS="$LDFLAGS -Wl,-rpath-link,$PREFIX/lib"
+  _cmake_config_extra+=(-DRPC_INCLUDE_DIR="${BUILD_PREFIX}/${HOST}/sysroot/usr/include")
+  # The ideal situation would be to have libtirpc and rpcsvc-proto as conda packages
+  # Since our rpcgen has an interpreter which is not the host's program interpreter ...
+  # -bash: .//dev/x86_64-conda_cos6-linux-gnu/sysroot/usr/bin/rpcgen:
+  # /lib/ld-linux-x86-64.so.2: bad ELF interpreter: No such file or directory
+  # ... we need this really nasty hack:
+  ln -s $CPP $BUILD_PREFIX/bin/cpp
+  cat <<'EOF' > $BUILD_PREFIX/bin/rpcgen
+#!/bin/bash
+$(patchelf --print-interpreter /proc/self/exe) ${BUILD_PREFIX}/${HOST}/sysroot/usr/bin/rpcgen -Y $BUILD_PREFIX/bin/ "$@"
+EOF
+  chmod +x $BUILD_PREFIX/bin/rpcgen
+
 fi
 LDFLAGS="${LDFLAGS} -Wl,-rpath,${PREFIX}/lib"
 CXXFLAGS="${CXXFLAGS} -fno-strict-aliasing"
