@@ -1,25 +1,67 @@
-About mysql
-===========
+About mysql-suite
+=================
 
-Home: https://www.mysql.com/
+Home: 
 
-Package license: GPL-2.0
+Package license: 
 
 Feedstock license: BSD 3-Clause
 
-Summary: Open source relational database management system.
+Summary: Common files for server and client libraries
 
-The MySQL(TM) software delivers a very fast, multi-threaded, multi-user,
-and robust SQL (Structured Query Language) database server. MySQL Server
-is intended for mission-critical, heavy-load production systems as well
-as for embedding into mass-deployed software.
 
 
 Current build status
 ====================
 
-[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/mysql-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/mysql-feedstock)
-![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
+
+<table>
+    
+  <tr>
+    <td>Azure</td>
+    <td>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=659&branchName=master">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mysql-feedstock?branchName=master">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody><tr>
+              <td>linux</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=659&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mysql-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=659&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mysql-feedstock?branchName=master&jobName=osx&configuration=osx_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=659&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mysql-feedstock?branchName=master&jobName=win&configuration=win_" alt="variant">
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </td>
+  </tr>
+  <tr>
+    <td>Linux_ppc64le</td>
+    <td>
+      <img src="https://img.shields.io/badge/ppc64le-disabled-lightgrey.svg" alt="ppc64le disabled">
+    </td>
+  </tr>
+</table>
 
 Current release info
 ====================
@@ -27,20 +69,26 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-mysql-green.svg)](https://anaconda.org/conda-forge/mysql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql.svg)](https://anaconda.org/conda-forge/mysql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql.svg)](https://anaconda.org/conda-forge/mysql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql.svg)](https://anaconda.org/conda-forge/mysql) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-mysql--client-green.svg)](https://anaconda.org/conda-forge/mysql-client) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql-client.svg)](https://anaconda.org/conda-forge/mysql-client) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql-client.svg)](https://anaconda.org/conda-forge/mysql-client) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql-client.svg)](https://anaconda.org/conda-forge/mysql-client) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-mysql--common-green.svg)](https://anaconda.org/conda-forge/mysql-common) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql-common.svg)](https://anaconda.org/conda-forge/mysql-common) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql-common.svg)](https://anaconda.org/conda-forge/mysql-common) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql-common.svg)](https://anaconda.org/conda-forge/mysql-common) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-mysql--devel-green.svg)](https://anaconda.org/conda-forge/mysql-devel) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql-devel.svg)](https://anaconda.org/conda-forge/mysql-devel) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql-devel.svg)](https://anaconda.org/conda-forge/mysql-devel) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql-devel.svg)](https://anaconda.org/conda-forge/mysql-devel) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-mysql--libs-green.svg)](https://anaconda.org/conda-forge/mysql-libs) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql-libs.svg)](https://anaconda.org/conda-forge/mysql-libs) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql-libs.svg)](https://anaconda.org/conda-forge/mysql-libs) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql-libs.svg)](https://anaconda.org/conda-forge/mysql-libs) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-mysql--router-green.svg)](https://anaconda.org/conda-forge/mysql-router) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql-router.svg)](https://anaconda.org/conda-forge/mysql-router) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql-router.svg)](https://anaconda.org/conda-forge/mysql-router) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql-router.svg)](https://anaconda.org/conda-forge/mysql-router) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-mysql--server-green.svg)](https://anaconda.org/conda-forge/mysql-server) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mysql-server.svg)](https://anaconda.org/conda-forge/mysql-server) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mysql-server.svg)](https://anaconda.org/conda-forge/mysql-server) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mysql-server.svg)](https://anaconda.org/conda-forge/mysql-server) |
 
-Installing mysql
-================
+Installing mysql-suite
+======================
 
-Installing `mysql` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `mysql-suite` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `mysql` can be installed with:
+Once the `conda-forge` channel has been enabled, `mysql, mysql-client, mysql-common, mysql-devel, mysql-libs, mysql-router, mysql-server` can be installed with:
 
 ```
-conda install mysql
+conda install mysql mysql-client mysql-common mysql-devel mysql-libs mysql-router mysql-server
 ```
 
 It is possible to list all of the versions of `mysql` available on your platform with:
@@ -53,6 +101,8 @@ conda search mysql --channel conda-forge
 About conda-forge
 =================
 
+[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
+
 conda-forge is a community-led conda channel of installable packages.
 In order to provide high-quality builds, the process has been automated into the
 conda-forge GitHub organization. The conda-forge organization contains one repository
@@ -62,7 +112,7 @@ A feedstock is made up of a conda recipe (the instructions on what and how to bu
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/)
-and [TravisCI](https://travis-ci.org/) it is possible to build and upload installable
+and [TravisCI](https://travis-ci.com/) it is possible to build and upload installable
 packages to the [conda-forge](https://anaconda.org/conda-forge)
 [Anaconda-Cloud](https://anaconda.org/) channel for Linux, Windows and OSX respectively.
 
@@ -86,17 +136,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating mysql-feedstock
-========================
+Updating mysql-suite-feedstock
+==============================
 
-If you would like to improve the mysql recipe or build a new
+If you would like to improve the mysql-suite recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/mysql-feedstock are
+Note that all branches in the conda-forge/mysql-suite-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
@@ -107,3 +157,10 @@ In order to produce a uniquely identifiable distribution:
  * If the version of a package **is** being increased, please remember to return
    the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
    back to 0.
+
+Feedstock Maintainers
+=====================
+
+* [@beckermr](https://github.com/beckermr/)
+* [@nwani](https://github.com/nwani/)
+

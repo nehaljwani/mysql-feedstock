@@ -1,18 +1,37 @@
-build_number_decrement:
-- '0'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '7'
 docker_image:
 - condaforge/linux-anvil-comp7
-perl:
-- '5.26'
+icu:
+- '64.2'
+libevent:
+- 2.1.10
+libprotobuf:
+- '3.11'
+lz4_c:
+- 1.9.2
+openssl:
+- 1.1.1
 pin_run_as_build:
-  perl:
+  icu:
+    max_pin: x
+  libevent:
     max_pin: x.x.x
-zip_keys:
-- - channel_sources
-  - channel_targets
-  - docker_image
-  - build_number_decrement
+  lz4-c:
+    max_pin: x.x.x
+  openssl:
+    max_pin: x.x.x
+  zlib:
+    max_pin: x.x
+  zstd:
+    max_pin: x.x.x
+zlib:
+- '1.2'
+zstd:
+- 1.4.4
