@@ -1,0 +1,60 @@
+From 3bcd704868e3309c7d4f14cb3863503226ee47bf Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 22 Jun 2020 09:58:22 -0400
+Subject: [PATCH 4/5] Rename VERSION file to not conflict with LLVM's <version>
+
+xref: https://trac.macports.org/ticket/59575
+xref: https://github.com/llvm/llvm-project/blob/llvmorg-9.0.1/libcxx/include/version
+---
+ VERSION                   | 4 ----
+ VERSION.txt               | 4 ++++
+ cmake/mysql_version.cmake | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 VERSION
+ create mode 100644 VERSION.txt
+
+diff --git a/VERSION b/VERSION
+deleted file mode 100644
+index dbd4c6b..0000000
+--- a/VERSION
++++ /dev/null
+@@ -1,4 +0,0 @@
+-MYSQL_VERSION_MAJOR=8
+-MYSQL_VERSION_MINOR=0
+-MYSQL_VERSION_PATCH=19
+-MYSQL_VERSION_EXTRA=
+diff --git a/VERSION.txt b/VERSION.txt
+new file mode 100644
+index 0000000..dbd4c6b
+--- /dev/null
++++ b/VERSION.txt
+@@ -0,0 +1,4 @@
++MYSQL_VERSION_MAJOR=8
++MYSQL_VERSION_MINOR=0
++MYSQL_VERSION_PATCH=19
++MYSQL_VERSION_EXTRA=
+diff --git a/cmake/mysql_version.cmake b/cmake/mysql_version.cmake
+index bed6e9f..a924ef0 100644
+--- a/cmake/mysql_version.cmake
++++ b/cmake/mysql_version.cmake
+@@ -30,7 +30,7 @@ SET(PROTOCOL_VERSION "10")
+ 
+ # Generate "something" to trigger cmake rerun when VERSION changes
+ CONFIGURE_FILE(
+-  ${CMAKE_SOURCE_DIR}/VERSION
++  ${CMAKE_SOURCE_DIR}/VERSION.txt
+   ${CMAKE_BINARY_DIR}/VERSION.dep
+ )
+ 
+@@ -38,7 +38,7 @@ CONFIGURE_FILE(
+ 
+ MACRO(MYSQL_GET_CONFIG_VALUE keyword var)
+  IF(NOT ${var})
+-   FILE (STRINGS ${CMAKE_SOURCE_DIR}/VERSION str REGEX "^[ ]*${keyword}=")
++   FILE (STRINGS ${CMAKE_SOURCE_DIR}/VERSION.txt str REGEX "^[ ]*${keyword}=")
+    IF(str)
+      STRING(REPLACE "${keyword}=" "" str ${str})
+      STRING(REGEX REPLACE  "[ ].*" ""  str "${str}")
+-- 
+2.23.0
+

@@ -1,0 +1,82 @@
+From e363dabe6342be653ab99d834e035787dd0f5481 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 22 Jun 2020 14:01:32 -0400
+Subject: [PATCH 5/5] Use macports-legacy-support for features >10.9
+
+---
+ plugin/group_replication/libmysqlgcs/CMakeLists.txt       | 8 ++++++++
+ .../libmysqlgcs/src/bindings/xcom/xcom/task.c             | 6 +++++-
+ storage/innobase/CMakeLists.txt                           | 7 +++++++
+ storage/innobase/handler/ha_innodb.cc                     | 5 +++++
+ 4 files changed, 25 insertions(+), 1 deletion(-)
+
+diff --git a/plugin/group_replication/libmysqlgcs/CMakeLists.txt b/plugin/group_replication/libmysqlgcs/CMakeLists.txt
+index 993aafa..76b945a 100644
+--- a/plugin/group_replication/libmysqlgcs/CMakeLists.txt
++++ b/plugin/group_replication/libmysqlgcs/CMakeLists.txt
+@@ -190,3 +190,11 @@ ENDIF()
+ 
+ # convenience target
+ ADD_CUSTOM_TARGET(libmysqlgcs DEPENDS mysqlgcs)
++
++IF(APPLE)
++  FIND_PATH(MacportsLegacySupport_INCLUDE_DIR NAMES LegacySupport/time.h)
++  FIND_LIBRARY(MacportsLegacySupport_LIBRARY NAMES MacportsLegacySupport)
++
++  TARGET_LINK_LIBRARIES(mysqlgcs PRIVATE ${MacportsLegacySupport_LIBRARY})
++  TARGET_INCLUDE_DIRECTORIES(mysqlgcs PRIVATE ${MacportsLegacySupport_INCLUDE_DIR})
++ENDIF()
+diff --git a/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.c b/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.c
+index 5530e0c..5c1aad7 100644
+--- a/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.c
++++ b/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.c
+@@ -66,7 +66,11 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <sys/types.h>
+-#include <time.h>
++#if (__APPLE__ && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101200)
++  #include <LegacySupport/time.h>
++#else
++  #include <time.h>
++#endif
+ 
+ #include "plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/node_connection.h"
+ #include "plugin/group_replication/libmysqlgcs/xdr_gen/xcom_vp.h"
+diff --git a/storage/innobase/CMakeLists.txt b/storage/innobase/CMakeLists.txt
+index a7f88c2..834e318 100644
+--- a/storage/innobase/CMakeLists.txt
++++ b/storage/innobase/CMakeLists.txt
+@@ -228,6 +228,13 @@ MYSQL_ADD_PLUGIN(innobase
+   MODULE_OUTPUT_NAME ha_innodb
+   LINK_LIBRARIES sql_dd sql_gis ${ZLIB_LIBRARY} ${LZ4_LIBRARY} ${NUMA_LIBRARY})
+ 
++IF(APPLE)
++  FIND_PATH(MacportsLegacySupport_INCLUDE_DIR NAMES LegacySupport/time.h)
++  FIND_LIBRARY(MacportsLegacySupport_LIBRARY NAMES MacportsLegacySupport)
++
++  TARGET_LINK_LIBRARIES(innobase ${MacportsLegacySupport_LIBRARY})
++  TARGET_INCLUDE_DIRECTORIES(innobase PRIVATE ${MacportsLegacySupport_INCLUDE_DIR})
++ENDIF()
+ 
+ # Avoid generating Hardware Capabilities due to crc32 instructions
+ IF(SOLARIS_INTEL)
+diff --git a/storage/innobase/handler/ha_innodb.cc b/storage/innobase/handler/ha_innodb.cc
+index 75c2b84..13652d0 100644
+--- a/storage/innobase/handler/ha_innodb.cc
++++ b/storage/innobase/handler/ha_innodb.cc
+@@ -196,6 +196,11 @@ this program; if not, write to the Free Software Foundation, Inc.,
+ 
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
++#if (__APPLE__ && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ < 101000)
++  #include <LegacySupport/unistd.h>
++#else
++  #include <unistd.h>
++#endif
+ #endif /* HAVE_UNISTD_H */
+ 
+ #ifndef UNIV_HOTBACKUP
+-- 
+2.23.0
+

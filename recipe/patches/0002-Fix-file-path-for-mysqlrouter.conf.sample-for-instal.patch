@@ -1,0 +1,26 @@
+From 49cfefe47d7269b07b8daf7251ca2c11b3f896c5 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sun, 21 Jun 2020 16:15:08 -0400
+Subject: [PATCH 2/2] Fix file path for mysqlrouter.conf.sample for
+ installation
+
+---
+ packaging/WiX/router/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packaging/WiX/router/CMakeLists.txt b/packaging/WiX/router/CMakeLists.txt
+index 14720cb..01f0216 100644
+--- a/packaging/WiX/router/CMakeLists.txt
++++ b/packaging/WiX/router/CMakeLists.txt
+@@ -46,7 +46,7 @@ ADD_CUSTOM_TARGET(
+   -P ${CMAKE_CURRENT_SOURCE_DIR}/../configure_file.cmake
+ )
+ 
+-INSTALL(FILES "${PROJECT_BINARY_DIR}/stage/\${CMAKE_INSTALL_CONFIG_NAME}/etc/mysqlrouter.conf.sample"
++INSTALL(FILES "${PROJECT_BINARY_DIR}/stage/${CMAKE_CFG_INTDIR}/etc/mysqlrouter.conf.sample"
+   DESTINATION "etc" COMPONENT Router) 
+ 
+ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/mysql_router_extra.wxs.in
+-- 
+2.24.1
+
