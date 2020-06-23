@@ -162,5 +162,5 @@ Feedstock Maintainers
 =====================
 
 * [@beckermr](https://github.com/beckermr/)
-* [@nwani](https://github.com/nwani/)
+* [@nehaljwani](https://github.com/nehaljwani/)
 

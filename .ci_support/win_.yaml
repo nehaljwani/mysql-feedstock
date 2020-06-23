@@ -5,7 +5,7 @@ channel_targets:
 cxx_compiler:
 - vs2017
 icu:
-- '64.2'
+- '67'
 libevent:
 - 2.1.10
 libprotobuf:
