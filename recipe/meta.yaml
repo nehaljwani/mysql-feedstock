@@ -15,7 +15,7 @@ source:
     - patches/0005-Use-macports-legacy-support-for-features-10.9.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
