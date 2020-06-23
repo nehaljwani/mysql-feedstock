@@ -9,7 +9,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '9'
 icu:
-- '64.2'
+- '67'
 libevent:
 - 2.1.10
 libprotobuf:
