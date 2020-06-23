@@ -1,4 +1,4 @@
-{% set version = "8.0.19" %}
+{% set version = "8.0.20" %}
 
 package:
   name: mysql-suite
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-boost-{{ version }}.tar.gz
-  sha256: 3622d2a53236ed9ca62de0616a7e80fd477a9a3f862ba09d503da188f53ca523
+  sha256: b6ad1a09eb146fa913f1afc257bbed8ffab688e2d504fb8ddb652f69f551a9c1
   patches:
     - patches/0001-Make-installation-of-pdb-files-optional.patch
     - patches/0002-Fix-file-path-for-mysqlrouter.conf.sample-for-instal.patch
@@ -263,4 +263,4 @@ about:
 extra:
   recipe-maintainers:
     - beckermr
-    - nwani
+    - nehaljwani
