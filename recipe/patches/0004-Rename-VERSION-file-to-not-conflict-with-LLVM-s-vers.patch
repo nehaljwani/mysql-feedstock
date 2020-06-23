@@ -21,7 +21,7 @@ index dbd4c6b..0000000
 @@ -1,4 +0,0 @@
 -MYSQL_VERSION_MAJOR=8
 -MYSQL_VERSION_MINOR=0
--MYSQL_VERSION_PATCH=19
+-MYSQL_VERSION_PATCH=20
 -MYSQL_VERSION_EXTRA=
 diff --git a/VERSION.txt b/VERSION.txt
 new file mode 100644
@@ -31,7 +31,7 @@ index 0000000..dbd4c6b
 @@ -0,0 +1,4 @@
 +MYSQL_VERSION_MAJOR=8
 +MYSQL_VERSION_MINOR=0
-+MYSQL_VERSION_PATCH=19
++MYSQL_VERSION_PATCH=20
 +MYSQL_VERSION_EXTRA=
 diff --git a/cmake/mysql_version.cmake b/cmake/mysql_version.cmake
 index bed6e9f..a924ef0 100644
