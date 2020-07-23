@@ -1,4 +1,4 @@
-{% set version = "8.0.20" %}
+{% set version = "8.0.21" %}
 
 package:
   name: mysql-suite
@@ -6,16 +6,17 @@ package:
 
 source:
   url: https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-boost-{{ version }}.tar.gz
-  sha256: b6ad1a09eb146fa913f1afc257bbed8ffab688e2d504fb8ddb652f69f551a9c1
+  sha256: 37231a123372a95f409857364dc1deb196b6f2c0b1fe60cc8382c7686b487f11
   patches:
     - patches/0001-Make-installation-of-pdb-files-optional.patch
     - patches/0002-Fix-file-path-for-mysqlrouter.conf.sample-for-instal.patch
     - patches/0003-Allow-flags-other-than-macros-in-CPPFLAGS.patch
     - patches/0004-Rename-VERSION-file-to-not-conflict-with-LLVM-s-vers.patch
     - patches/0005-Use-macports-legacy-support-for-features-10.9.patch
+    - patches/0006-Remove-forceful-injection-of-debug-info.patch
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:

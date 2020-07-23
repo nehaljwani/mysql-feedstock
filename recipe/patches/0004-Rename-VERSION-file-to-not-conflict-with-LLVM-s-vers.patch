@@ -1,4 +1,4 @@
-From 3bcd704868e3309c7d4f14cb3863503226ee47bf Mon Sep 17 00:00:00 2001
+From 580579901152c1dbded9b909c329bbed7ffd68e1 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 22 Jun 2020 09:58:22 -0400
 Subject: [PATCH 4/5] Rename VERSION file to not conflict with LLVM's <version>
@@ -15,26 +15,26 @@ xref: https://github.com/llvm/llvm-project/blob/llvmorg-9.0.1/libcxx/include/ver
 
 diff --git a/VERSION b/VERSION
 deleted file mode 100644
-index dbd4c6b..0000000
+index 2d44b898104..00000000000
 --- a/VERSION
 +++ /dev/null
 @@ -1,4 +0,0 @@
 -MYSQL_VERSION_MAJOR=8
 -MYSQL_VERSION_MINOR=0
--MYSQL_VERSION_PATCH=20
+-MYSQL_VERSION_PATCH=21
 -MYSQL_VERSION_EXTRA=
 diff --git a/VERSION.txt b/VERSION.txt
 new file mode 100644
-index 0000000..dbd4c6b
+index 00000000000..2d44b898104
 --- /dev/null
 +++ b/VERSION.txt
 @@ -0,0 +1,4 @@
 +MYSQL_VERSION_MAJOR=8
 +MYSQL_VERSION_MINOR=0
-+MYSQL_VERSION_PATCH=20
++MYSQL_VERSION_PATCH=21
 +MYSQL_VERSION_EXTRA=
 diff --git a/cmake/mysql_version.cmake b/cmake/mysql_version.cmake
-index bed6e9f..a924ef0 100644
+index bed6e9f02e2..a924ef09bac 100644
 --- a/cmake/mysql_version.cmake
 +++ b/cmake/mysql_version.cmake
 @@ -30,7 +30,7 @@ SET(PROTOCOL_VERSION "10")
@@ -56,5 +56,5 @@ index bed6e9f..a924ef0 100644
       STRING(REPLACE "${keyword}=" "" str ${str})
       STRING(REGEX REPLACE  "[ ].*" ""  str "${str}")
 -- 
-2.23.0
+2.26.2
 

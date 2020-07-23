@@ -15,6 +15,7 @@ fi
 declare -a _xtra_cmake_args
 if [[ $target_platform == osx-64 ]]; then
     _xtra_cmake_args+=(-DWITH_ROUTER=OFF)
+    export CXXFLAGS="${CXXFLAGS:-} -D_LIBCPP_DISABLE_AVAILABILITY=1"
 fi
 
 cmake -S$SRC_DIR -Bbuild -GNinja \
