@@ -1,0 +1,40 @@
+From 500159b779379c65350f1df7bebc32b2219a38bf Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Thu, 23 Jul 2020 12:56:13 -0400
+Subject: [PATCH 6/6] Remove forceful injection of debug info
+
+---
+ cmake/os/Windows.cmake | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/cmake/os/Windows.cmake b/cmake/os/Windows.cmake
+index 69763f10e9a..56e4ce9bf3e 100644
+--- a/cmake/os/Windows.cmake
++++ b/cmake/os/Windows.cmake
+@@ -127,9 +127,9 @@ IF(MSVC)
+   #     Allowing inline reduces test time using the debug server by
+   #     30% or so. If you do want to keep inlining off, set the
+   #     cmake flag WIN_DEBUG_NO_INLINE.
+-  FOREACH(lang C CXX)
+-    SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Z7")
+-  ENDFOREACH()
++  #  FOREACH(lang C CXX)
++  #    SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Z7")
++  #  ENDFOREACH()
+ 
+   FOREACH(flag
+       CMAKE_C_FLAGS_MINSIZEREL
+@@ -141,8 +141,8 @@ IF(MSVC)
+     IF(LINK_STATIC_RUNTIME_LIBRARIES)
+       STRING(REPLACE "/MD"  "/MT" "${flag}" "${${flag}}")
+     ENDIF()
+-    STRING(REPLACE "/Zi"  "/Z7" "${flag}" "${${flag}}")
+-    STRING(REPLACE "/ZI"  "/Z7" "${flag}" "${${flag}}")
++    #  STRING(REPLACE "/Zi"  "/Z7" "${flag}" "${${flag}}")
++    #  STRING(REPLACE "/ZI"  "/Z7" "${flag}" "${${flag}}")
+     IF (NOT WIN_DEBUG_NO_INLINE)
+       STRING(REPLACE "/Ob0"  "/Ob1" "${flag}" "${${flag}}")
+     ENDIF()
+-- 
+2.26.2
+
