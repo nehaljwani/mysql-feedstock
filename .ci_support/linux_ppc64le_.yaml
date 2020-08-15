@@ -1,0 +1,37 @@
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '8'
+docker_image:
+- condaforge/linux-anvil-comp7
+icu:
+- '67'
+libevent:
+- 2.1.10
+libprotobuf:
+- '3.12'
+lz4_c:
+- 1.9.2
+openssl:
+- 1.1.1
+pin_run_as_build:
+  icu:
+    max_pin: x
+  libevent:
+    max_pin: x.x.x
+  lz4-c:
+    max_pin: x.x.x
+  openssl:
+    max_pin: x.x.x
+  zlib:
+    max_pin: x.x
+target_platform:
+- linux-ppc64le
+zlib:
+- '1.2'
+zstd:
+- '1.4'

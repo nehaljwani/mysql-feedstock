@@ -1,12 +1,17 @@
 #!/bin/bash
+set -x
 
 _rpcgen_hack_dir=""
-if [[ $target_platform == linux-64 ]]; then
+if [[ "${target_platform}" == *"linux"* ]]; then
     _rpcgen_hack_dir=$SRC_DIR/rpcgen_hack
+    _target_sysroot=$($CXX --print-sysroot)
+    _target_rpcgen_bin=${_target_sysroot}/usr/bin/rpcgen
+    _target_interpreter=${_target_sysroot}/$(patchelf --print-interpreter ${_target_rpcgen_bin})
+    _target_libdir=${_target_sysroot}/$(dirname ${_target_interpreter})
     mkdir -p $_rpcgen_hack_dir/bin
     cat <<EOF > ${_rpcgen_hack_dir}/bin/rpcgen
 #!/bin/bash
-$(patchelf --print-interpreter $CPP) $($CXX --print-sysroot)/usr/bin/rpcgen -Y ${_rpcgen_hack_dir}/bin \$@
+${_target_interpreter} --library-path ${_target_libdir} ${_target_rpcgen_bin} -Y ${_rpcgen_hack_dir}/bin \$@
 EOF
     ln -s $(readlink -f ${CPP}) ${_rpcgen_hack_dir}/bin/cpp
     chmod +x ${_rpcgen_hack_dir}/bin/{rpcgen,cpp}
