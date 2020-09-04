@@ -17,7 +17,7 @@ source:
     - patches/0007-Link-libgcc-libstdc-statically-for-codgen-binaries.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -244,8 +244,7 @@ outputs:
         - command -v mysql.server                  # [unix]
     about:
       license_file: LICENSE
-      summary:
-        - Meta package for backwards compat + bonus content
+      summary: Meta package for backwards compat + bonus content
 
 
 about:
