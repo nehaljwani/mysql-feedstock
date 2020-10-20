@@ -5,11 +5,9 @@ Home:
 
 Package license: 
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mysql-feedstock/blob/master/LICENSE.txt)
 
 Summary: Common files for server and client libraries
-
-
 
 Current build status
 ====================

@@ -1,0 +1,24 @@
+From 61f1613bd8e0cc7068e7443b03acaab5459fb294 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 19 Oct 2020 23:48:16 -0400
+Subject: [PATCH 4/4] Add include header for std::string
+
+---
+ sql/create_def.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sql/create_def.cc b/sql/create_def.cc
+index 4a16c59a780..916124f7d2a 100644
+--- a/sql/create_def.cc
++++ b/sql/create_def.cc
+@@ -64,6 +64,7 @@
+ #include <thread>
+ #include <unordered_set>
+ #include <vector>
++#include <string>
+ 
+ /** Prints an error message supplied and attaches GetLastError with formated
+  * message. */
+-- 
+2.17.1
+
