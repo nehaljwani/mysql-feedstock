@@ -11,9 +11,11 @@ source:
     - patches/0001-Make-installation-of-pdb-files-optional.patch
     - patches/0002-Fix-file-path-for-mysqlrouter.conf.sample-for-instal.patch
     - patches/0003-Allow-flags-other-than-macros-in-CPPFLAGS.patch
+    - patches/0004-Add-include-header-for-std-string.patch
     - patches/0005-Use-macports-legacy-support-for-features-10.9.patch
     - patches/0006-Remove-forceful-injection-of-debug-info.patch
     - patches/0007-Link-libgcc-libstdc-statically-for-codgen-binaries.patch
+    - patches/0008-Make-LIBEVENT_PTHREADS-conditional-on-CMAKE_USE_PTHR.patch
 
 build:
   number: 0

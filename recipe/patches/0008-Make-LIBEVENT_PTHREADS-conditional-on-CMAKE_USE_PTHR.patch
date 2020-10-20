@@ -1,0 +1,30 @@
+From 53cf22a1b372ef2944c28e53dbbf1470e8aaff09 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 19 Oct 2020 23:45:13 -0400
+Subject: [PATCH 8/9] Make LIBEVENT_PTHREADS conditional on
+ CMAKE_USE_PTHREADS_INIT
+
+Requirement on LIBEVENT_PTHREADS was added by 2b84f0e3
+---
+ cmake/libevent.cmake | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/cmake/libevent.cmake b/cmake/libevent.cmake
+index 783939b8538..6f3b8edb942 100644
+--- a/cmake/libevent.cmake
++++ b/cmake/libevent.cmake
+@@ -86,7 +86,10 @@ MACRO (FIND_SYSTEM_LIBEVENT)
+   IF (LIBEVENT_CORE AND LIBEVENT_INCLUDE_DIRECTORY)
+     SET(LIBEVENT_FOUND TRUE)
+     SET(LIBEVENT_LIBRARIES
+-      ${LIBEVENT_CORE} ${LIBEVENT_EXTRA} ${LIBEVENT_OPENSSL} ${LIBEVENT_PTHREADS})
++      ${LIBEVENT_CORE} ${LIBEVENT_EXTRA} ${LIBEVENT_OPENSSL})
++    IF(CMAKE_USE_PTHREADS_INIT)
++      LIST(APPEND LIBEVENT_LIBRARIES ${LIBEVENT_PTHREADS})
++    ENDIF(CMAKE_USE_PTHREADS_INIT)
+     SET(LIBEVENT_INCLUDE_DIRS ${LIBEVENT_INCLUDE_DIRECTORY})
+     IF(NOT LIBEVENT_INCLUDE_DIRECTORY STREQUAL "/usr/include")
+       MESSAGE(STATUS "LIBEVENT_INCLUDE_DIRS ${LIBEVENT_INCLUDE_DIRS}")
+-- 
+2.17.1
+
