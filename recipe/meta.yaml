@@ -16,6 +16,7 @@ source:
     - patches/0006-Remove-forceful-injection-of-debug-info.patch
     - patches/0007-Link-libgcc-libstdc-statically-for-codgen-binaries.patch
     - patches/0008-Make-LIBEVENT_PTHREADS-conditional-on-CMAKE_USE_PTHR.patch
+    - patches/0009-Use-lower-case-for-boolean-type.patch
 
 build:
   number: 1
