@@ -1,0 +1,11 @@
+# hmaarrfk: I'm not too sure why, but
+# compiler version 9 on ppc64le doesn't
+# work
+# https://github.com/conda-forge/mysql-feedstock/pull/26
+# https://github.com/conda-forge/mysql-feedstock/pull/27
+# https://github.com/conda-forge/mysql-feedstock/pull/28
+# https://github.com/conda-forge/mysql-feedstock/pull/29
+c_compiler_version:    # [ppc64le]
+  - '8'                # [ppc64le]
+cxx_compiler_version:  # [ppc64le]
+  - '8'                # [ppc64le]
