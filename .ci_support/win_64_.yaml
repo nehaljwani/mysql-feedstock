@@ -11,7 +11,7 @@ libevent:
 libprotobuf:
 - '3.13'
 lz4_c:
-- 1.9.2
+- 1.9.3
 openssl:
 - 1.1.1
 pin_run_as_build:
