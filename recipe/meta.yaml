@@ -19,7 +19,7 @@ source:
     - patches/0009-Use-lower-case-for-boolean-type.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
