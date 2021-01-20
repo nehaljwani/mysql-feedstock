@@ -26,7 +26,7 @@ cmake -S%SRC_DIR% -Bbuild -GNinja ^
   -DWITH_EDITLINE=system ^
   -DWITH_PROTOBUF=system ^
   -DWITH_LIBEVENT=system ^
-  -DWITH_BOOST=%SRC_DIR%\boost ^
+  -DWITH_BOOST=%LIBRARY_INC% ^
   -DDEFAULT_CHARSET=utf8 ^
   -DDEFAULT_COLLATION=utf8_general_ci ^
   -DINSTALL_INCLUDEDIR=include/mysql ^

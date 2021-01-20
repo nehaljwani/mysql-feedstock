@@ -41,6 +41,7 @@ requirements:
     - openssl
     - zlib
     - zstd
+    - boost-cpp  # [win]
 
 
 outputs:
@@ -72,6 +73,7 @@ outputs:
         - openssl
         - zlib
         - zstd
+        - boost-cpp  # [win]
         - {{ pin_subpackage('mysql-common', exact=True) }}
       run:
         - {{ pin_subpackage('mysql-common', exact=True) }}
@@ -102,6 +104,7 @@ outputs:
         - openssl
         - zlib
         - zstd
+        - boost-cpp  # [win]
         - {{ pin_subpackage('mysql-common', exact=True) }}
       run:
         - {{ pin_subpackage('mysql-common', exact=True) }}
@@ -160,6 +163,7 @@ outputs:
         - openssl
         - zlib
         - zstd
+        - boost-cpp  # [win]
         - {{ pin_subpackage('mysql-common', exact=True) }}
       run:
         - {{ pin_subpackage('mysql-common', exact=True) }}
@@ -213,6 +217,7 @@ outputs:
         - openssl
         - zlib
         - zstd
+        - boost-cpp  # [win]
     test:
       commands:
         - mysqlrouter --version
