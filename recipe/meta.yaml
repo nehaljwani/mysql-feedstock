@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-boost-{{ version }}.tar.gz
-  sha256: 1c7a424303c134758e59607a0b3172e43a21a27ff08e8c88c2439ffd4fc724a5
+  #sha256: 1c7a424303c134758e59607a0b3172e43a21a27ff08e8c88c2439ffd4fc724a5
   patches:
     - patches/0001-Make-installation-of-pdb-files-optional.patch
     - patches/0002-Fix-file-path-for-mysqlrouter.conf.sample-for-instal.patch
@@ -20,12 +20,14 @@ source:
 
 build:
   number: 0
+  skip: True  # [not win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
     - ninja
+    - m2-bison  # [win]
   host:
     - cyrus-sasl               # [unix]
     - icu
@@ -57,6 +59,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+        - m2-bison  # [win]
       host:
         - cyrus-sasl               # [unix]
         - icu
@@ -91,6 +94,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+        - m2-bison  # [win]
       host:
         - libedit  # [unix]
         - lz4-c
@@ -120,6 +124,7 @@ outputs:
       build:
         - cmake
         - ninja
+        - m2-bison  # [win]
       host:
         - {{ pin_subpackage('mysql-libs', exact=True) }}
       run:
@@ -149,6 +154,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+        - m2-bison  # [win]
       host:
         - openssl
         - zlib
@@ -174,6 +180,7 @@ outputs:
       build:
         - cmake
         - ninja
+        - m2-bison  # [win]
     test:
       commands:
         - test -f $PREFIX/share/mysql/english/errmsg.sys  # [unix]
@@ -197,6 +204,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+        - m2-bison  # [win]
       host:
         - libevent
         - libprotobuf
@@ -230,6 +238,7 @@ outputs:
       build:
         - cmake
         - ninja
+        - m2-bison  # [win]
       run:
         - {{ pin_subpackage('mysql-server', exact=True) }}
         - {{ pin_subpackage('mysql-client', exact=True) }}
