@@ -5,7 +5,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/mysql/mysql-server/archive/7ed30a748964c009d4909cb8b4b22036ebdef239.zip
+  # url: https://github.com/mysql/mysql-server/archive/7ed30a748964c009d4909cb8b4b22036ebdef239.zip
+  url: https://github.com/mysql/mysql-server/archive/761dcc9fe746ffea551f372104c9230643f01fb4.zip
   #url: https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-boost-{{ version }}.tar.gz
   #sha256: 1c7a424303c134758e59607a0b3172e43a21a27ff08e8c88c2439ffd4fc724a5
   patches:
