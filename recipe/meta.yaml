@@ -10,7 +10,8 @@ source:
   # url: https://github.com/mysql/mysql-server/archive/d9c1874250f3bc342de042611919e3f75b5a19e0.zip  # bad
   # url: https://github.com/mysql/mysql-server/archive/852884d665326d9f3cb0e84322bcfddfe4f914aa.zip  # good
   # url: https://github.com/mysql/mysql-server/archive/45874ad277356fbd5ba3283e5f52516641a93584.zip  # bad
-  url: https://github.com/mysql/mysql-server/archive/e77126da2ebb10a35e4e0e002e6f439c230c1915.zip
+  # url: https://github.com/mysql/mysql-server/archive/e77126da2ebb10a35e4e0e002e6f439c230c1915.zip  # bad
+  url: https://github.com/mysql/mysql-server/archive/0c2029bc1710928e5de358f3100a030a1c7c8a9c.zip
   #url: https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-boost-{{ version }}.tar.gz
   #sha256: 1c7a424303c134758e59607a0b3172e43a21a27ff08e8c88c2439ffd4fc724a5
   patches:
