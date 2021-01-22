@@ -10,6 +10,8 @@ if exist %LIBRARY_LIB%\liblz4.lib (
   set "lz4_lib=%LIBRARY_LIB%\lz4.lib"
 )
 
+set "CMAKE_CXX_FLAGS=/bigobj"
+
 cmake -S%SRC_DIR% -Bbuild -GNinja ^
   -DCMAKE_CXX_STANDARD=14 ^
   -DCMAKE_BUILD_TYPE=Release ^
@@ -38,4 +40,4 @@ cmake -S%SRC_DIR% -Bbuild -GNinja ^
   -DINSTALL_MYSQLSHAREDIR=share/mysql ^
   -DINSTALL_SUPPORTFILESDIR=mysql/support-files
 
-cmake --build build --config Release
+cmake --build build --config Release -- mysqld
