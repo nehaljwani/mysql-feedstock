@@ -10,10 +10,10 @@ if exist %LIBRARY_LIB%\liblz4.lib (
   set "lz4_lib=%LIBRARY_LIB%\lz4.lib"
 )
 
-set "CXXFLAGS=/bigobj"
+REM set "CXXFLAGS=/bigobj"
 
 cmake -S%SRC_DIR% -Bbuild -GNinja ^
-  -DCMAKE_CXX_STANDARD=14 ^
+  -DCMAKE_CXX_STANDARD=17 ^
   -DCMAKE_BUILD_TYPE=Release ^
   -DFORCE_UNSUPPORTED_COMPILER=1 ^
   -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
