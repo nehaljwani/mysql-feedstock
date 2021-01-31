@@ -18,6 +18,7 @@ source:
     - patches/0008-Make-LIBEVENT_PTHREADS-conditional-on-CMAKE_USE_PTHR.patch
     - patches/0009-Use-lower-case-for-boolean-type.patch
     - patches/0010-Enable-use-of-c-17-for-MSVC.patch
+    - patches/0011-Add-dependency-on-comp_err-iff-that-target-exists.patch
 
 build:
   number: 0
@@ -26,7 +27,12 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
+    - icu                      # [target_platform == 'osx-arm64']
     - ninja
+    - libprotobuf              # [target_platform == 'osx-arm64']
+    - macports-legacy-support  # [target_platform == 'osx-arm64']
+    - openssl                  # [target_platform == 'osx-arm64']
+    - zstd                     # [target_platform == 'osx-arm64']
   host:
     - cyrus-sasl               # [unix]
     - icu
