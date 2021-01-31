@@ -1,0 +1,28 @@
+From a942427dbb5c58e0b28112cf0b587fb84c01cf24 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sat, 30 Jan 2021 19:48:42 -0500
+Subject: [PATCH 11/11] Add dependency on comp_err iff that target exists
+
+It's not built if we are cross compiling
+---
+ utilities/CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/utilities/CMakeLists.txt b/utilities/CMakeLists.txt
+index 28d4aec852d..d08781b8cc8 100644
+--- a/utilities/CMakeLists.txt
++++ b/utilities/CMakeLists.txt
+@@ -103,7 +103,9 @@ ADD_DEFINITIONS(-DMUTEX_EVENT)
+ IF(TARGET copy_openssl_dlls)
+   ADD_DEPENDENCIES(GenError copy_openssl_dlls)
+   ADD_DEPENDENCIES(comp_client_err copy_openssl_dlls)
+-  ADD_DEPENDENCIES(comp_err copy_openssl_dlls)
++  IF(TARGET comp_err)
++    ADD_DEPENDENCIES(comp_err copy_openssl_dlls)
++  ENDIF()
+ ENDIF()
+ 
+ MYSQL_ADD_EXECUTABLE(static_thread_local_test
+-- 
+2.29.2
+
