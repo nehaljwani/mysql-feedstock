@@ -9,7 +9,7 @@ icu:
 libevent:
 - 2.1.10
 libprotobuf:
-- '3.14'
+- '3.15'
 lz4_c:
 - 1.9.3
 openssl:
