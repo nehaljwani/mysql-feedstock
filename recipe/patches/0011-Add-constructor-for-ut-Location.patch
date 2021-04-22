@@ -1,0 +1,29 @@
+From e3a6426288050761bce922ce05f21c4a9836e1be Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Thu, 22 Apr 2021 09:32:37 -0400
+Subject: [PATCH 11/11] Add constructor for ut::Location
+
+This patch resolves the following error with the MSVC compiler:
+
+dict0dict.h(1096): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'ut::Location'
+dict0dict.h(1203): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+dict0dict.h(1203): note: This diagnostic occurred in the compiler generated function 'void dict_sys_t::for_each_table(Functor &)'
+---
+ storage/innobase/include/ut0ut.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/storage/innobase/include/ut0ut.h b/storage/innobase/include/ut0ut.h
+index 8b5041fbe7..d0898fba07 100644
+--- a/storage/innobase/include/ut0ut.h
++++ b/storage/innobase/include/ut0ut.h
+@@ -157,6 +157,7 @@ performance. */
+ 
+ namespace ut {
+ struct Location {
++  Location(const char *fn, size_t ln) : filename(fn), line(ln) {}
+   const char *filename;
+   size_t line;
+ };
+-- 
+2.30.2
+

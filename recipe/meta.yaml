@@ -18,6 +18,7 @@ source:
     - patches/0008-Make-LIBEVENT_PTHREADS-conditional-on-CMAKE_USE_PTHR.patch
     - patches/0009-Enable-use-of-c-17-with-MSVC.patch
     - patches/0010-Add-dependency-on-comp_err-iff-that-target-exists.patch
+    - patches/0011-Add-constructor-for-ut-Location.patch
 
 build:
   number: 0
