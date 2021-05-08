@@ -38,4 +38,6 @@ cmake -S%SRC_DIR% -Bbuild -GNinja ^
   -DINSTALL_MYSQLSHAREDIR=share/mysql ^
   -DINSTALL_SUPPORTFILESDIR=mysql/support-files
 
-cmake --build build --config Release -- -v
+cmake --build build --config Release -- -v GenMysqldDef
+copy build\sql\mysqld.def D:\bld\mysqld.def
+exit 1
