@@ -1,0 +1,48 @@
+From 9881149d2d73681b8708966680319ee8f42e3788 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sat, 8 May 2021 17:38:35 -0400
+Subject: [PATCH] bye exports
+
+---
+ cmake/plugin.cmake | 2 +-
+ sql/CMakeLists.txt | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/cmake/plugin.cmake b/cmake/plugin.cmake
+index 6dae93bb10..30cb236d2d 100644
+--- a/cmake/plugin.cmake
++++ b/cmake/plugin.cmake
+@@ -207,7 +207,7 @@ MACRO(MYSQL_ADD_PLUGIN plugin_arg)
+     # Use MYSQL_PLUGIN_IMPORT for static data symbols to be exported.
+     IF(NOT ARG_CLIENT_ONLY)
+       IF(WIN32 OR APPLE)
+-        TARGET_LINK_LIBRARIES (${target} mysqld ${ARG_LINK_LIBRARIES})
++        TARGET_LINK_LIBRARIES (${target} $<TARGET_PROPERTY:mysqld,LINK_LIBRARIES> ${ARG_LINK_LIBRARIES})
+       ENDIF()
+     ENDIF()
+     ADD_DEPENDENCIES(${target} GenError ${ARG_DEPENDENCIES})
+diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+index 5f9958e497..8da06b9ce8 100644
+--- a/sql/CMakeLists.txt
++++ b/sql/CMakeLists.txt
+@@ -1037,7 +1037,7 @@ IF(APPLE)
+   ENDIF()
+ ENDIF()
+ 
+-SET_TARGET_PROPERTIES(mysqld PROPERTIES ENABLE_EXPORTS TRUE)
++#SET_TARGET_PROPERTIES(mysqld PROPERTIES ENABLE_EXPORTS TRUE)
+ 
+ IF(WITH_LTO OR CMAKE_COMPILER_FLAG_WITH_LTO)
+   # We get ODR violations because of multiple bison parsers.
+@@ -1116,7 +1116,7 @@ IF(MSVC)
+   ADD_DEPENDENCIES(mysqld GenMysqldDef)
+ ENDIF()
+ 
+-SET_TARGET_PROPERTIES(mysqld PROPERTIES ENABLE_EXPORTS TRUE)
++#SET_TARGET_PROPERTIES(mysqld PROPERTIES ENABLE_EXPORTS TRUE)
+ TARGET_LINK_LIBRARIES(mysqld
+   sql_main sql_gis binlog rpl master slave sql_dd mysys
+   minchassis binlogevents_static ${ICU_LIBRARIES})
+-- 
+2.30.2
+
