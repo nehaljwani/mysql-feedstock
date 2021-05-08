@@ -11,7 +11,7 @@ if exist %LIBRARY_LIB%\liblz4.lib (
 )
 
 cmake -S%SRC_DIR% -Bbuild -GNinja ^
-  -DCMAKE_CXX_STANDARD=17 ^
+  -DCMAKE_CXX_STANDARD=14 ^
   -DCMAKE_BUILD_TYPE=Release ^
   -DFORCE_UNSUPPORTED_COMPILER=1 ^
   -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
@@ -38,4 +38,4 @@ cmake -S%SRC_DIR% -Bbuild -GNinja ^
   -DINSTALL_MYSQLSHAREDIR=share/mysql ^
   -DINSTALL_SUPPORTFILESDIR=mysql/support-files
 
-cmake --build build --config Release
+cmake --build build --config Release -- -v
