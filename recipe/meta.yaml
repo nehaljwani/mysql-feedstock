@@ -19,6 +19,7 @@ source:
     - patches/0009-Enable-use-of-c-17-with-MSVC.patch
     - patches/0010-Add-dependency-on-comp_err-iff-that-target-exists.patch
     - patches/0011-Add-constructor-for-ut-Location.patch
+    - patches/0012-Reduce-number-of-symbols-being-exported-from-mysqld..patch
 
 build:
   number: 0
