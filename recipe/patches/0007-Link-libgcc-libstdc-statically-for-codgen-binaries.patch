@@ -1,7 +1,7 @@
-From 8a470c5bf22caf588f98c9dbce951a15cbb1df7e Mon Sep 17 00:00:00 2001
+From dd8c21faeb4bd92b6762b029b291b0a602832b60 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 14 Aug 2020 20:30:20 -0400
-Subject: [PATCH 7/7] Link libgcc & libstdc++ statically for codgen binaries
+Subject: [PATCH 07/10] Link libgcc & libstdc++ statically for codgen binaries
 
 Makes it easier for cross compilation
 ---
@@ -9,10 +9,10 @@ Makes it easier for cross compilation
  1 file changed, 13 insertions(+)
 
 diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
-index cb0d00402f8..a40ba3067e7 100644
+index 5fd225c1ef..5f9958e497 100644
 --- a/sql/CMakeLists.txt
 +++ b/sql/CMakeLists.txt
-@@ -68,6 +68,10 @@ MYSQL_ADD_EXECUTABLE(gen_lex_token
+@@ -71,6 +71,10 @@ MYSQL_ADD_EXECUTABLE(gen_lex_token
    DEPENDENCIES GenServerSource
    SKIP_INSTALL
    )
@@ -23,7 +23,7 @@ index cb0d00402f8..a40ba3067e7 100644
  
  MY_CHECK_CXX_COMPILER_WARNING("-Wmissing-profile" HAS_MISSING_PROFILE)
  IF(HAS_MISSING_PROFILE)
-@@ -88,6 +92,11 @@ MYSQL_ADD_EXECUTABLE(gen_keyword_list
+@@ -91,6 +95,11 @@ MYSQL_ADD_EXECUTABLE(gen_keyword_list
    LINK_LIBRARIES ${ICU_LIBRARIES} ${CMAKE_DL_LIBS}
    SKIP_INSTALL
    )
@@ -35,7 +35,7 @@ index cb0d00402f8..a40ba3067e7 100644
  
  IF(HAS_MISSING_PROFILE)
    ADD_COMPILE_FLAGS(gen_keyword_list.cc COMPILE_FLAGS ${HAS_MISSING_PROFILE})
-@@ -1136,6 +1145,10 @@ SET_SOURCE_FILES_PROPERTIES(
+@@ -1217,6 +1226,10 @@ SET_SOURCE_FILES_PROPERTIES(
  
  # Gen_lex_hash
  MYSQL_ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc SKIP_INSTALL)
@@ -47,5 +47,5 @@ index cb0d00402f8..a40ba3067e7 100644
  IF(HAS_MISSING_PROFILE)
    ADD_COMPILE_FLAGS(gen_lex_hash.cc COMPILE_FLAGS ${HAS_MISSING_PROFILE})
 -- 
-2.17.1
+2.30.2
 

@@ -1,7 +1,7 @@
-From fbbd8c1e6db0b95723ec3a34fcf3f17af7b2dafa Mon Sep 17 00:00:00 2001
+From 9d99d935f72f96ae451b23eee045030483bf643a Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Tue, 21 Jul 2020 22:56:50 -0400
-Subject: [PATCH 5/5] Use macports-legacy-support for features >10.9
+Subject: [PATCH 05/10] Use macports-legacy-support for features >10.9
 
 ---
  plugin/group_replication/libmysqlgcs/CMakeLists.txt       | 8 ++++++++
@@ -11,10 +11,10 @@ Subject: [PATCH 5/5] Use macports-legacy-support for features >10.9
  4 files changed, 25 insertions(+), 1 deletion(-)
 
 diff --git a/plugin/group_replication/libmysqlgcs/CMakeLists.txt b/plugin/group_replication/libmysqlgcs/CMakeLists.txt
-index 544b0bebf6a..2b09b21dfc8 100644
+index b42f741bef..6581960947 100644
 --- a/plugin/group_replication/libmysqlgcs/CMakeLists.txt
 +++ b/plugin/group_replication/libmysqlgcs/CMakeLists.txt
-@@ -212,3 +212,11 @@ ENDIF()
+@@ -220,3 +220,11 @@ ENDIF()
  
  # convenience target
  ADD_CUSTOM_TARGET(libmysqlgcs DEPENDS mysqlgcs)
@@ -27,10 +27,10 @@ index 544b0bebf6a..2b09b21dfc8 100644
 +  TARGET_INCLUDE_DIRECTORIES(mysqlgcs PRIVATE ${MacportsLegacySupport_INCLUDE_DIR})
 +ENDIF()
 diff --git a/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.cc b/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.cc
-index 7c48423fc97..6ec4d92a2ce 100644
+index 8d3b2e1b74..09ed4d645f 100644
 --- a/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.cc
 +++ b/plugin/group_replication/libmysqlgcs/src/bindings/xcom/xcom/task.cc
-@@ -66,7 +66,11 @@
+@@ -69,7 +69,11 @@
  #include <stdlib.h>
  #include <string.h>
  #include <sys/types.h>
@@ -44,10 +44,10 @@ index 7c48423fc97..6ec4d92a2ce 100644
  #include "xcom/node_connection.h"
  #include "xdr_gen/xcom_vp.h"
 diff --git a/storage/innobase/CMakeLists.txt b/storage/innobase/CMakeLists.txt
-index 80bebd0acfd..ce1ce8afa2b 100644
+index fe8b6a7876..c167d2b740 100644
 --- a/storage/innobase/CMakeLists.txt
 +++ b/storage/innobase/CMakeLists.txt
-@@ -231,6 +231,13 @@ MYSQL_ADD_PLUGIN(innobase
+@@ -257,6 +257,13 @@ MYSQL_ADD_PLUGIN(innobase
    MODULE_OUTPUT_NAME ha_innodb
    LINK_LIBRARIES sql_dd sql_gis ${ZLIB_LIBRARY} ${LZ4_LIBRARY} ${NUMA_LIBRARY})
  
@@ -62,10 +62,10 @@ index 80bebd0acfd..ce1ce8afa2b 100644
  # Avoid generating Hardware Capabilities due to crc32 instructions
  IF(SOLARIS_INTEL)
 diff --git a/storage/innobase/handler/ha_innodb.cc b/storage/innobase/handler/ha_innodb.cc
-index d69b31cfdb1..c2e10565e1d 100644
+index 08c46bbed4..b62b2ef03b 100644
 --- a/storage/innobase/handler/ha_innodb.cc
 +++ b/storage/innobase/handler/ha_innodb.cc
-@@ -198,6 +198,11 @@ this program; if not, write to the Free Software Foundation, Inc.,
+@@ -199,6 +199,11 @@ this program; if not, write to the Free Software Foundation, Inc.,
  
  #ifdef HAVE_UNISTD_H
  #include <unistd.h>
@@ -78,5 +78,5 @@ index d69b31cfdb1..c2e10565e1d 100644
  
  #ifndef UNIV_HOTBACKUP
 -- 
-2.26.2
+2.30.2
 
