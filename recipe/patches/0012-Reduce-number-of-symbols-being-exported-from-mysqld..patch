@@ -1,0 +1,34 @@
+From d917c18a8166cc0d2ea882f648f0f70ca8984a63 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sun, 9 May 2021 17:29:26 -0400
+Subject: [PATCH 12/12] Reduce number of symbols being exported from mysqld.exe
+
+Due to the export limit (16-bit ordinal field in PE, max val = 2^16-1),
+if the number of symbols required to be exported end up to be greater
+than 65535, link.exe errors out with:
+   LINK : fatal error LNK1189: library limit of 65535 objects exceeded
+
+The approx. number of symbols generated with create_def.cc for 8.0.24
+are 66340, which is > 65535. This patch filters out the rapidjson
+symbols since it is a header only library and if the plugins require
+rapidjson, they are likely to include them inside the DLL itself. The
+change brings down the count to approx. 65260, which is < 65535.
+---
+ sql/create_def.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sql/create_def.cc b/sql/create_def.cc
+index 644aac5029..2151b54e35 100644
+--- a/sql/create_def.cc
++++ b/sql/create_def.cc
+@@ -323,6 +323,7 @@ void Unique_symbol_map::insert(const std::string &symbol_line) {
+       "?_G",         // scalar deleting destructor
+       "_VInfreq_?",  // special label (exception handler?) for Intel compiler
+       "?_E",         // vector deleting destructor
++      "rapidjson"    // header only (plugins will include if req'd)
+   };
+   if (symbol_line.find("External") == std::string::npos) {
+     return;
+-- 
+2.30.2
+

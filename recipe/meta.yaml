@@ -1,4 +1,4 @@
-{% set version = "8.0.23" %}
+{% set version = "8.0.24" %}
 
 package:
   name: mysql-suite
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-boost-{{ version }}.tar.gz
-  sha256: 1c7a424303c134758e59607a0b3172e43a21a27ff08e8c88c2439ffd4fc724a5
+  sha256: 4bc9c54b38e9e2a3f5cc77f21791dc52372f15c5473f7d427793f6ec44bf5900
   patches:
     - patches/0001-Make-installation-of-pdb-files-optional.patch
     - patches/0002-Fix-file-path-for-mysqlrouter.conf.sample-for-instal.patch
@@ -16,12 +16,13 @@ source:
     - patches/0006-Remove-forceful-injection-of-debug-info.patch
     - patches/0007-Link-libgcc-libstdc-statically-for-codgen-binaries.patch
     - patches/0008-Make-LIBEVENT_PTHREADS-conditional-on-CMAKE_USE_PTHR.patch
-    - patches/0009-Use-lower-case-for-boolean-type.patch
-    - patches/0010-Enable-use-of-c-17-for-MSVC.patch
-    - patches/0011-Add-dependency-on-comp_err-iff-that-target-exists.patch
+    - patches/0009-Enable-use-of-c-17-with-MSVC.patch
+    - patches/0010-Add-dependency-on-comp_err-iff-that-target-exists.patch
+    - patches/0011-Add-constructor-for-ut-Location.patch
+    - patches/0012-Reduce-number-of-symbols-being-exported-from-mysqld..patch
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
