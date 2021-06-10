@@ -22,7 +22,7 @@ source:
     - patches/0012-Reduce-number-of-symbols-being-exported-from-mysqld..patch
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -123,7 +123,8 @@ outputs:
         - cmake -DCOMPONENT=Development -P ${SRC_DIR}/build/cmake_install.cmake  # [unix]
         - cmake -DCOMPONENT=Development -P %SRC_DIR%\build\cmake_install.cmake   # [win]
       run_exports:
-        - {{ pin_subpackage('mysql-libs', max_pin='x.x.x') }}
+        # https://mysqlserverteam.com/the-client-library-part-2-the-version-number/
+        - {{ pin_subpackage('mysql-libs', max_pin='x.x') }}
     requirements:
       build:
         - cmake
