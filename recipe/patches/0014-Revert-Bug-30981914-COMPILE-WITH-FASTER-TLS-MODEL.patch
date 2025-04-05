@@ -1,7 +1,7 @@
-From ac2a441a2e320a0ecb2b22140fd6b918bcd7bd5f Mon Sep 17 00:00:00 2001
+From 3212bd6e84d4e0d0fc846e22796bfd0d3cdc4d7b Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sat, 18 Dec 2021 16:57:08 -0500
-Subject: [PATCH 14/21] Revert "Bug #30981914: COMPILE WITH FASTER TLS MODEL"
+Subject: [PATCH 14/23] Revert "Bug #30981914: COMPILE WITH FASTER TLS MODEL"
 
 xref: https://github.com/conda-forge/mysql-feedstock/issues/60
 xref: https://bugs.launchpad.net/ubuntu/+source/mysql-8.0/+bug/1889851
@@ -32,5 +32,5 @@ index e191e9f806c..0e331ee46f3 100644
    STRING_PREPEND(CMAKE_C_FLAGS                  "${COMMON_C_FLAGS} ")
    STRING_PREPEND(CMAKE_C_FLAGS_RELWITHDEBINFO   "${SECTIONS_FLAG} ")
 -- 
-2.45.2
+2.48.1
 

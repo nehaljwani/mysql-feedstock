@@ -1,7 +1,7 @@
-From 22bdc94103715d3a4e64ef9950afe5d7fac8413b Mon Sep 17 00:00:00 2001
+From 4386de0b4ad9352fb93bfc525ee015b869a0c043 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sun, 9 May 2021 17:29:26 -0400
-Subject: [PATCH 09/21] Reduce number of symbols being exported from mysqld.exe
+Subject: [PATCH 09/23] Reduce number of symbols being exported from mysqld.exe
 
 Due to the export limit (16-bit ordinal field in PE, max val = 2^16-1),
 if the number of symbols required to be exported end up to be greater
@@ -50,5 +50,5 @@ index 749cd507151..b376202d0dc 100644
    if (symbol_line.find("notype () ") == std::string::npos) {
      symbol.append(" DATA");
 -- 
-2.45.2
+2.48.1
 

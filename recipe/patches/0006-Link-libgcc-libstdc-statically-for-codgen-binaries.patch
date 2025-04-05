@@ -1,7 +1,7 @@
-From b7fa41d88191bff2b6248b79cfafca1dbb518fc9 Mon Sep 17 00:00:00 2001
+From 2ed8c73ef87a51b5314358d4f31ed3660df0b1d9 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Fri, 14 Aug 2020 20:30:20 -0400
-Subject: [PATCH 06/21] Link libgcc & libstdc++ statically for codgen binaries
+Subject: [PATCH 06/23] Link libgcc & libstdc++ statically for codgen binaries
 
 Makes it easier for cross compilation
 ---
@@ -9,7 +9,7 @@ Makes it easier for cross compilation
  1 file changed, 13 insertions(+)
 
 diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
-index fc362296c4f..68de6622513 100644
+index 9c02e41ef06..bf0c4dd497d 100644
 --- a/sql/CMakeLists.txt
 +++ b/sql/CMakeLists.txt
 @@ -71,6 +71,10 @@ MYSQL_ADD_EXECUTABLE(gen_lex_token
@@ -35,7 +35,7 @@ index fc362296c4f..68de6622513 100644
  
  IF(WITH_LTO OR CMAKE_COMPILER_FLAG_WITH_LTO)
    TARGET_COMPILE_OPTIONS(gen_keyword_list PRIVATE "-fno-lto")
-@@ -1397,6 +1406,10 @@ SET_SOURCE_FILES_PROPERTIES(
+@@ -1391,6 +1400,10 @@ SET_SOURCE_FILES_PROPERTIES(
  
  # Gen_lex_hash
  MYSQL_ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc SKIP_INSTALL)
@@ -47,5 +47,5 @@ index fc362296c4f..68de6622513 100644
  IF(HAS_MISSING_PROFILE)
    ADD_COMPILE_FLAGS(
 -- 
-2.45.2
+2.48.1
 

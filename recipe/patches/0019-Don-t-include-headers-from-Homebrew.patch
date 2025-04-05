@@ -1,21 +1,21 @@
-From 96fb470bd56d86b7f70523158d976da9c7b363c5 Mon Sep 17 00:00:00 2001
+From d1cc948402b634b9ad856ed3a1b149a4383819b8 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Wed, 21 Feb 2024 16:30:32 +0100
-Subject: [PATCH 19/21] Don't include headers from Homebrew
+Subject: [PATCH 19/23] Don't include headers from Homebrew
 
 ---
- CMakeLists.txt    | 36 ------------------------------------
- cmake/bison.cmake | 22 ----------------------
+ CMakeLists.txt    | 55 -----------------------------------------------
+ cmake/bison.cmake | 22 -------------------
  cmake/fido2.cmake |  2 --
  cmake/icu.cmake   |  6 ------
- cmake/ssl.cmake   | 17 -----------------
- 5 files changed, 83 deletions(-)
+ cmake/ssl.cmake   | 17 ---------------
+ 5 files changed, 102 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5f2d137d7a1..87f4c93af5e 100644
+index 5592c23c85b..81385c1635d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1691,17 +1691,6 @@ SET(SYSTEM_LIBRARIES
+@@ -1733,36 +1733,6 @@ SET(SYSTEM_LIBRARIES
    ZLIB      # Xcode
    )
  
@@ -28,12 +28,31 @@ index 5f2d137d7a1..87f4c93af5e 100644
 -  ENDIF()
 -  # The Xcode version is 1.2.12 which is too old
 -  LIST(REMOVE_ITEM SYSTEM_LIBRARIES ZLIB)
+-  # Link with the correct version of libc++.dylib
+-  # Also use ar/ranlib from the compiler bundle.
+-  IF(CMAKE_CXX_COMPILER MATCHES "/opt/homebrew/Cellar" OR
+-      CMAKE_CXX_COMPILER MATCHES ${HOMEBREW_HOME}
+-      )
+-    SET(CMAKE_AR ${CMAKE_CXX_COMPILER_AR})
+-    SET(CMAKE_RANLIB ${CMAKE_CXX_COMPILER_RANLIB})
+-    GET_FILENAME_COMPONENT(CXX_DIR ${CMAKE_CXX_COMPILER} DIRECTORY)
+-    GET_FILENAME_COMPONENT(LLVM_DIR ${CXX_DIR} DIRECTORY)
+-    SET(LLVMBUNDLE_LINKER_FLAGS " -L${LLVM_DIR}/lib/c++")
+-    IF(EXISTS ${LLVM_DIR}/lib/unwind/libunwind.dylib)
+-      STRING_APPEND(LLVMBUNDLE_LINKER_FLAGS " -L${LLVM_DIR}/lib/unwind -lunwind")
+-    ELSEIF(EXISTS "${LLVM_DIR}/lib/libunwind.dylib")
+-      STRING_APPEND(LLVMBUNDLE_LINKER_FLAGS " -L${LLVM_DIR}/lib -lunwind")
+-    ENDIF()
+-    STRING_APPEND(CMAKE_EXE_LINKER_FLAGS "${LLVMBUNDLE_LINKER_FLAGS}")
+-    STRING_APPEND(CMAKE_MODULE_LINKER_FLAGS "${LLVMBUNDLE_LINKER_FLAGS}")
+-    STRING_APPEND(CMAKE_SHARED_LINKER_FLAGS "${LLVMBUNDLE_LINKER_FLAGS}")
+-  ENDIF()
 -ENDIF()
 -
  SET(WITH_SYSTEM_LIBS_DEFAULT OFF)
  OPTION(WITH_SYSTEM_LIBS
    "Use -DWITH_XXX=system for ${SYSTEM_LIBRARIES}" ${WITH_SYSTEM_LIBS_DEFAULT})
-@@ -1952,31 +1941,6 @@ IF(WITH_AUTHENTICATION_CLIENT_PLUGINS)
+@@ -2038,31 +2008,6 @@ IF(WITH_AUTHENTICATION_CLIENT_PLUGINS)
    MYSQL_CHECK_FIDO_DLLS()
  ENDIF()
  
@@ -99,10 +118,10 @@ index 854a98f36f5..e4c1e3e47a0 100644
  # https://github.com/lexxmark/winflexbison/releases
  # or
 diff --git a/cmake/fido2.cmake b/cmake/fido2.cmake
-index c96a57a76ae..4db7338f523 100644
+index 874279b5d3b..91e149a4dbe 100644
 --- a/cmake/fido2.cmake
 +++ b/cmake/fido2.cmake
-@@ -122,8 +122,6 @@ ENDFUNCTION(WARN_MISSING_SYSTEM_FIDO)
+@@ -120,8 +120,6 @@ ENDFUNCTION(WARN_MISSING_SYSTEM_FIDO)
  FUNCTION(FIND_SYSTEM_FIDO)
    IF(APPLE)
      SET(CMAKE_REQUIRED_INCLUDES
@@ -167,5 +186,5 @@ index 932659d030f..dd275008581 100644
  
  
 -- 
-2.45.2
+2.48.1
 

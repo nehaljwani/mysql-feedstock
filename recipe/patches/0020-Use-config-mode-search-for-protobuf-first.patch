@@ -1,7 +1,7 @@
-From 532228cb8e47b69633e71b8f21b29a478257b4f6 Mon Sep 17 00:00:00 2001
+From 5902f506965dddbcf45f30cd8d7b55e3cd91905b Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sun, 11 Jun 2023 23:26:01 +0100
-Subject: [PATCH 20/21] Use config mode search for protobuf first
+Subject: [PATCH 20/23] Use config mode search for protobuf first
 
 The recent versions of `libprotobuf` (>=4.22.0) provide their own CMake
 configs. We should check for the existence of the config and use the
@@ -13,13 +13,13 @@ See also: https://gitlab.kitware.com/cmake/cmake/-/issues/24321
  1 file changed, 16 insertions(+), 1 deletion(-)
 
 diff --git a/cmake/protobuf.cmake b/cmake/protobuf.cmake
-index bfcd8377576..9b5b391b453 100644
+index db672e43342..2d4d21e8637 100644
 --- a/cmake/protobuf.cmake
 +++ b/cmake/protobuf.cmake
-@@ -123,7 +123,22 @@ MACRO(MYSQL_CHECK_PROTOBUF)
-   IF(WITH_PROTOBUF STREQUAL "bundled")
-     MYSQL_USE_BUNDLED_PROTOBUF()
-   ELSE()
+@@ -130,7 +130,22 @@ MACRO(MYSQL_CHECK_PROTOBUF)
+     IF(WITH_INTERNAL)
+       FIND_PACKAGE(gRPC QUIET)
+     ENDIF()
 -    FIND_PACKAGE(Protobuf)
 +    # CMake ships with a FindProtobuf.cmake which we don't want to use
 +    # Specifying 'CONFIG' makes CMake look for protobuf-config.cmake
@@ -41,5 +41,5 @@ index bfcd8377576..9b5b391b453 100644
  
    IF(NOT PROTOBUF_FOUND)
 -- 
-2.45.2
+2.48.1
 

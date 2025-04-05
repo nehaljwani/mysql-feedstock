@@ -1,12 +1,13 @@
-{% set version = "9.0.1" %}
+{% set version = "9.2.0" %}
+{% set major_minor = ".".join(version.split(".")[:2]) %}
 
 package:
   name: mysql-suite
   version: {{ version }}
 
 source:
-  url: https://cdn.mysql.com/Downloads/MySQL-9.0/mysql-{{ version }}.tar.gz
-  sha256: 18fa65f1ea6aea71e418fe0548552d9a28de68e2b8bc3ba9536599eb459a6606
+  url: https://cdn.mysql.com/Downloads/MySQL-{{ major_minor }}/mysql-{{ version }}.tar.gz
+  sha256: a39d11fdf6cf8d1b03b708d537a9132de4b99a9eb4d610293937f0687cd37a12
   patches:
     - patches/0001-Make-installation-of-pdb-files-optional.patch
     - patches/0002-Fix-file-path-for-mysqlrouter.conf.sample-for-instal.patch
@@ -34,7 +35,7 @@ source:
     - patches/0023-Allow-setting-WITH_SASL-none.patch
 
 build:
-  number: 5
+  number: 0
 
 requirements:
   build:
@@ -42,7 +43,7 @@ requirements:
     - {{ stdlib("c") }}
     - cmake
     - ninja
-    - bison                    # [osx]
+    - bison                    # [unix]
     - pkg-config
     - icu                      # [target_platform == 'osx-arm64']
     - libprotobuf              # [target_platform == 'osx-arm64']
@@ -242,6 +243,7 @@ outputs:
         - cmake
         - ninja
       host:
+        - icu
         - libprotobuf
         - lz4-c
         - openssl

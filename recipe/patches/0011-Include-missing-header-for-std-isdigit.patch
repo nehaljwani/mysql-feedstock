@@ -1,7 +1,7 @@
-From 33adb189d03a9a31032c1ef142ad99dbfb1f7ead Mon Sep 17 00:00:00 2001
+From 0641b687be37d5520c27897024dfd69df1c398e4 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Wed, 21 Jul 2021 00:55:54 +0530
-Subject: [PATCH 11/21] Include missing header for std::isdigit()
+Subject: [PATCH 11/23] Include missing header for std::isdigit()
 
 This patch resolves the following error with the MSVC compiler:
 
@@ -13,7 +13,7 @@ This patch resolves the following error with the MSVC compiler:
  1 file changed, 2 insertions(+)
 
 diff --git a/sql/server_component/clone_protocol_service.cc b/sql/server_component/clone_protocol_service.cc
-index f813e84206a..2e4b32f59c3 100644
+index 1b626b072eb..7287ae08f7c 100644
 --- a/sql/server_component/clone_protocol_service.cc
 +++ b/sql/server_component/clone_protocol_service.cc
 @@ -42,6 +42,8 @@
@@ -26,5 +26,5 @@ index f813e84206a..2e4b32f59c3 100644
  
  /** The minimum idle timeout in seconds. It is kept at 8 hours which is also
 -- 
-2.45.2
+2.48.1
 

@@ -1,17 +1,17 @@
-From fc5d5deda324536a4952396c448a5f02a73a9d78 Mon Sep 17 00:00:00 2001
+From de8afa8237d3e67de256b391783be8b197dd65ed Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 19 Jun 2023 20:25:57 +0100
-Subject: [PATCH 18/21] Make libfido checks conditional
+Subject: [PATCH 18/23] Make libfido checks conditional
 
 ---
  CMakeLists.txt | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2ce44db3c54..5f2d137d7a1 100644
+index 9c15bcea1a6..5592c23c85b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1947,8 +1947,10 @@ ENDIF()
+@@ -2033,8 +2033,10 @@ ENDIF()
  MYSQL_CHECK_RAPIDJSON()
  
  # Look for fido2 library
@@ -25,5 +25,5 @@ index 2ce44db3c54..5f2d137d7a1 100644
  IF(APPLE)
    GET_FILENAME_COMPONENT(HOMEBREW_BASE ${HOMEBREW_HOME} DIRECTORY)
 -- 
-2.45.2
+2.48.1
 

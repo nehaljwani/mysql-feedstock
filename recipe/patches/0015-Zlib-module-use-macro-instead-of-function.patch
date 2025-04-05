@@ -1,7 +1,7 @@
-From 6914e217d3588eb87f81511b3a0da0bd28f96a92 Mon Sep 17 00:00:00 2001
+From 0362a32b0b96c09f91e0890caa9181623c2b3b7a Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Thu, 27 Apr 2023 11:53:31 +0530
-Subject: [PATCH 15/21] Zlib module: use macro instead of function
+Subject: [PATCH 15/23] Zlib module: use macro instead of function
 
 Variables set by find_package() are not globally scoped
 ---
@@ -9,7 +9,7 @@ Variables set by find_package() are not globally scoped
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/cmake/zlib.cmake b/cmake/zlib.cmake
-index 364483ed826..c9101ba1f85 100644
+index f1eb1b17c55..0940f93b977 100644
 --- a/cmake/zlib.cmake
 +++ b/cmake/zlib.cmake
 @@ -51,7 +51,7 @@ FUNCTION(FIND_ZLIB_VERSION ZLIB_INCLUDE_DIR)
@@ -31,5 +31,5 @@ index 364483ed826..c9101ba1f85 100644
  MACRO (RESET_ZLIB_VARIABLES)
    # Reset whatever FIND_PACKAGE may have left behind.
 -- 
-2.45.2
+2.48.1
 

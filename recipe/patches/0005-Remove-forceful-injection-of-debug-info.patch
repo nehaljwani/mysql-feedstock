@@ -1,20 +1,20 @@
-From b3205ac43fcb8e5a051ddf6a3320caf2532757b0 Mon Sep 17 00:00:00 2001
+From f8b131862392d1df10e0b129e41be3530d2ffb46 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Thu, 23 Jul 2020 12:56:13 -0400
-Subject: [PATCH 05/21] Remove forceful injection of debug info
+Subject: [PATCH 05/23] Remove forceful injection of debug info
 
 ---
  cmake/os/Windows.cmake | 17 +++++++----------
  1 file changed, 7 insertions(+), 10 deletions(-)
 
 diff --git a/cmake/os/Windows.cmake b/cmake/os/Windows.cmake
-index f13bbdf5fff..e8907687900 100644
+index b9428da34a4..f0f98aa56f9 100644
 --- a/cmake/os/Windows.cmake
 +++ b/cmake/os/Windows.cmake
-@@ -157,13 +157,13 @@ IF(MSVC)
-   #     Allowing inline reduces test time using the debug server by
-   #     30% or so. If you do want to keep inlining off, set the
-   #     cmake flag WIN_DEBUG_NO_INLINE.
+@@ -162,13 +162,13 @@ IF(MSVC)
+   # - Disable optimization
+   #     /Od
+   #     Turns off all optimizations in the program and speeds compilation.
 -  FOREACH(lang C CXX)
 -    IF(FPROFILE_GENERATE OR FPROFILE_USE)
 -      SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Zi")
@@ -22,17 +22,17 @@ index f13bbdf5fff..e8907687900 100644
 -      SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Z7")
 -    ENDIF()
 -  ENDFOREACH()
-+  #FOREACH(lang C CXX)
-+  #  IF(FPROFILE_GENERATE OR FPROFILE_USE)
-+  #    SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Zi")
-+  #  ELSE()
-+  #    SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Z7")
-+  #  ENDIF()
-+  #ENDFOREACH()
++  #  FOREACH(lang C CXX)
++  #    IF(FPROFILE_GENERATE OR FPROFILE_USE)
++  #      SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Zi")
++  #    ELSE()
++  #      SET(CMAKE_${lang}_FLAGS_RELEASE "${CMAKE_${lang}_FLAGS_RELEASE} /Z7")
++  #    ENDIF()
++  #  ENDFOREACH()
  
-   FOREACH(flag
-       CMAKE_C_FLAGS_MINSIZEREL
-@@ -177,9 +177,6 @@ IF(MSVC)
+   # Defaults initialized by cmake:
+   # DEBUG          /MDd /Zi /Od  /Ob0 /RTC1
+@@ -187,9 +187,6 @@ IF(MSVC)
      ENDIF()
      IF(FPROFILE_GENERATE OR FPROFILE_USE)
        STRING(REPLACE "/ZI"  "/Zi" "${flag}" "${${flag}}")
@@ -43,5 +43,5 @@ index f13bbdf5fff..e8907687900 100644
      IF (NOT WIN_DEBUG_NO_INLINE)
        STRING(REPLACE "/Ob0"  "/Ob1" "${flag}" "${${flag}}")
 -- 
-2.45.2
+2.48.1
 

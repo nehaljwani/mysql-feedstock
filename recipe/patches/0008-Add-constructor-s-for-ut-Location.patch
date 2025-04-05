@@ -1,7 +1,7 @@
-From 49821b17defce700f117fad37192453c73c25a6a Mon Sep 17 00:00:00 2001
+From f7880bf135b4c44ea8024b8024e4c9b66a22e6d6 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Thu, 22 Apr 2021 09:32:37 -0400
-Subject: [PATCH 08/21] Add constructor(s) for ut::Location
+Subject: [PATCH 08/23] Add constructor(s) for ut::Location
 
 This patch resolves the following error with the MSVC compiler:
 
@@ -13,7 +13,7 @@ dict0dict.h(1203): note: This diagnostic occurred in the compiler generated func
  1 file changed, 2 insertions(+)
 
 diff --git a/storage/innobase/include/ut0core.h b/storage/innobase/include/ut0core.h
-index 8bb5e26adfb..e4a01b7c9b8 100644
+index c3387ed80ec..d949085f93e 100644
 --- a/storage/innobase/include/ut0core.h
 +++ b/storage/innobase/include/ut0core.h
 @@ -34,6 +34,8 @@
@@ -26,5 +26,5 @@ index 8bb5e26adfb..e4a01b7c9b8 100644
    size_t line;
    std::string str() const;
 -- 
-2.45.2
+2.48.1
 

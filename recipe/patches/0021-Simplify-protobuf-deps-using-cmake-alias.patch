@@ -1,17 +1,17 @@
-From 9a973a15f818413f0aaedb359786efb426aa9ef3 Mon Sep 17 00:00:00 2001
+From 3c682125679c617a277a73269a0a51663ffecdbe Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Wed, 7 Aug 2024 12:25:14 +0100
-Subject: [PATCH 21/21] Simplify protobuf deps using cmake alias
+Subject: [PATCH 21/23] Simplify protobuf deps using cmake alias
 
 ---
- cmake/protobuf.cmake | 49 +++-----------------------------------------
- 1 file changed, 3 insertions(+), 46 deletions(-)
+ cmake/protobuf.cmake | 66 ++------------------------------------------
+ 1 file changed, 3 insertions(+), 63 deletions(-)
 
 diff --git a/cmake/protobuf.cmake b/cmake/protobuf.cmake
-index 9b5b391b453..d450a0c80bb 100644
+index 2d4d21e8637..b14ac80eda9 100644
 --- a/cmake/protobuf.cmake
 +++ b/cmake/protobuf.cmake
-@@ -165,55 +165,12 @@ MACRO(MYSQL_CHECK_PROTOBUF)
+@@ -172,73 +172,13 @@ MACRO(MYSQL_CHECK_PROTOBUF)
      # ADD_LIBRARY(ext::libprotobuf-lite ALIAS libprotobuf-lite)
      # ADD_LIBRARY(ext::libprotoc ALIAS libprotoc)
    ELSE()
@@ -22,30 +22,48 @@ index 9b5b391b453..d450a0c80bb 100644
 -    # set_property(TARGET protobuf::libprotobuf APPEND PROPERTY
 -    #              INTERFACE_COMPILE_FEATURES cxx_std_11
 -    #             )
+-    # INTERFACE_LINK_LIBRARIES will be needed once this is built
+-    # with protobuf 22 and above (lots of abseil libs).
 -    ADD_LIBRARY(ext::libprotobuf UNKNOWN IMPORTED)
 -    SET_TARGET_PROPERTIES(ext::libprotobuf PROPERTIES
 -      INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${Protobuf_INCLUDE_DIR}")
 -    SET_TARGET_PROPERTIES(ext::libprotobuf PROPERTIES
 -      IMPORTED_LOCATION "${PROTOBUF_LIBRARY}")
+-    IF(LINUX)
+-      FIND_LIBRARY_DEPENDENCIES("${PROTOBUF_LIBRARY}" protobuf_dependencies)
+-      SET_TARGET_PROPERTIES(ext::libprotobuf PROPERTIES
+-        INTERFACE_LINK_LIBRARIES "${protobuf_dependencies}")
+-    ENDIF()
 -
 -    ADD_LIBRARY(ext::libprotobuf-lite UNKNOWN IMPORTED)
 -    SET_TARGET_PROPERTIES(ext::libprotobuf-lite PROPERTIES
 -      INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${Protobuf_INCLUDE_DIR}")
 -    SET_TARGET_PROPERTIES(ext::libprotobuf-lite PROPERTIES
 -      IMPORTED_LOCATION "${PROTOBUF_LITE_LIBRARY}")
+-    IF(LINUX)
+-      FIND_LIBRARY_DEPENDENCIES("${PROTOBUF_LITE_LIBRARY}" lite_dependencies)
+-      SET_TARGET_PROPERTIES(ext::libprotobuf-lite PROPERTIES
+-        INTERFACE_LINK_LIBRARIES "${lite_dependencies}")
+-    ENDIF()
 -
 -    ADD_LIBRARY(ext::libprotoc UNKNOWN IMPORTED)
 -    SET_TARGET_PROPERTIES(ext::libprotoc PROPERTIES
 -      INTERFACE_SYSTEM_INCLUDE_DIRECTORIES "${Protobuf_INCLUDE_DIR}")
 -    SET_TARGET_PROPERTIES(ext::libprotoc PROPERTIES
 -      IMPORTED_LOCATION "${Protobuf_PROTOC_LIBRARY}")
+-    IF(LINUX)
+-      FIND_LIBRARY_DEPENDENCIES(
+-        "${Protobuf_PROTOC_LIBRARY}" protoc_dependencies)
+-      SET_TARGET_PROPERTIES(ext::libprotoc PROPERTIES
+-        INTERFACE_LINK_LIBRARIES "${protoc_dependencies}")
+-    ENDIF()
 +    ADD_LIBRARY(ext::libprotobuf ALIAS protobuf::libprotobuf)
 +    ADD_LIBRARY(ext::libprotobuf-lite ALIAS protobuf::libprotobuf-lite)
 +    ADD_LIBRARY(ext::libprotoc ALIAS protobuf::libprotoc)
    ENDIF()
  
    FIND_PROTOBUF_VERSION()
--
+ 
 -  # Version 22 and up depend on ~65 abseil .dylibs.
 -  IF(APPLE AND WITH_PROTOBUF STREQUAL "system" AND
 -      PB_MINOR_VERSION VERSION_GREATER 21)
@@ -71,5 +89,5 @@ index 9b5b391b453..d450a0c80bb 100644
      COULD_NOT_FIND_PROTOBUF()
    ENDIF()
 -- 
-2.45.2
+2.48.1
 

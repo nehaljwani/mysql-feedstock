@@ -1,7 +1,7 @@
-From d6c23bef7007ed652124668589d260ed1d971fb4 Mon Sep 17 00:00:00 2001
+From 0caddb4f04112ac571b2e017c79797dfd2102672 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sun, 18 Jun 2023 15:40:42 +0100
-Subject: [PATCH 17/21] Revert "BUG#34849343 Aligned_atomic not working as
+Subject: [PATCH 17/23] Revert "BUG#34849343 Aligned_atomic not working as
  intended - aligned_alloc"
 
 This reverts commit be8348a7c3e8510b998a063065b626a459631b32.
@@ -11,10 +11,10 @@ This reverts commit be8348a7c3e8510b998a063065b626a459631b32.
  2 files changed, 18 insertions(+), 54 deletions(-)
 
 diff --git a/mysys/CMakeLists.txt b/mysys/CMakeLists.txt
-index abc496095a4..adac1ef9e9f 100644
+index 367c320712a..406ccd52baf 100644
 --- a/mysys/CMakeLists.txt
 +++ b/mysys/CMakeLists.txt
-@@ -56,7 +56,6 @@ SET(MYSYS_SOURCES
+@@ -57,7 +57,6 @@ SET(MYSYS_SOURCES
    mf_wcomp.cc
    mulalloc.cc
    my_access.cc
@@ -172,5 +172,5 @@ index 17372edd969..ab1666cafe6 100644
    return *this->m_underlying;
  }
 -- 
-2.45.2
+2.48.1
 
